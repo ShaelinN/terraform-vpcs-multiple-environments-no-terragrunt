@@ -1,7 +1,7 @@
 terraform {
- backend "s3" {
+  backend "s3" {
     bucket = "nshaelin-terraform-state"
-    key = "terraform.tfstate"
+    key    = "terraform.tfstate"
     region = "af-south-1"
   }
 }
@@ -18,7 +18,7 @@ data "aws_ami" "al2" {
     name   = "name"
     values = ["amzn2-ami-hvm-*"]
   }
-  
+
   filter {
     name   = "owner-alias"
     values = ["amazon"]

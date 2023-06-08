@@ -1,11 +1,11 @@
 module "vpc_dev" {
-  source = "terraform-aws-modules/vpc/aws"
-  cidr = local.dev_vpc_cidr
-  azs = [var.availability_zone]
-  public_subnets = [local.dev_public_subnet_cidr]
-  private_subnets = [local.dev_private_subnet_cidr]
+  source             = "terraform-aws-modules/vpc/aws"
+  cidr               = local.dev_vpc_cidr
+  azs                = [var.availability_zone]
+  public_subnets     = [local.dev_public_subnet_cidr]
+  private_subnets    = [local.dev_private_subnet_cidr]
   enable_nat_gateway = true
-  name = "sn-vpc-dev"
+  name               = "sn-vpc-dev"
 }
 
 resource "aws_subnet" "isolated_subnet_dev" {
@@ -18,9 +18,9 @@ resource "aws_subnet" "isolated_subnet_dev" {
 }
 
 resource "aws_instance" "private_ec2_dev" {
-  subnet_id = module.vpc_dev.private_subnets[0]
+  subnet_id     = module.vpc_dev.private_subnets[0]
   instance_type = "t3.micro"
-  ami = data.aws_ami.al2.id
+  ami           = data.aws_ami.al2.id
 
   tags = {
     Name = "sn-dev-server"
